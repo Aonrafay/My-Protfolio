@@ -414,14 +414,36 @@
   }
   .project-overlay-icon {
     position: absolute;
-    inset: 0;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 48px;
+    font-size: 36px;
     z-index: 2;
     pointer-events: none;
     text-shadow: 0 0 40px rgba(0,0,0,0.5);
+  }
+  .project-img {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 90px;
+    height: 90px;
+    border-radius: 14px;
+    object-fit: cover;
+    z-index: 3;
+    border: 2px solid var(--border2);
+    animation: float-img 3s ease-in-out infinite;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+    opacity: 0.9;
+    background: var(--bg3);
+  }
+  @keyframes float-img {
+    0%, 100% { transform: translateY(-50%); }
+    50% { transform: translateY(calc(-50% - 8px)); }
   }
   .project-body {
     padding: 28px 24px;
@@ -526,6 +548,27 @@
   .about-overlay-title { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
   .about-overlay-sub { font-size: 12px; color: var(--muted); font-family: var(--font-mono); }
 
+  .about-photo {
+    position: absolute;
+    left: 50%;
+    top: 45%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    z-index: 2;
+    border: 3px solid var(--accent);
+    animation: photo-morph 4s ease-in-out infinite;
+    box-shadow: 0 0 50px rgba(124,58,237,0.4);
+    background: var(--bg3);
+  }
+  @keyframes photo-morph {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); border-radius: 50%; }
+    33% { transform: translate(-50%, -50%) scale(1.04); border-radius: 48%; }
+    66% { transform: translate(-50%, -50%) scale(0.97); border-radius: 52%; }
+  }
+
   .about-text { opacity: 0; }
   .about-text p { font-size: 16px; color: var(--muted); line-height: 1.9; margin-bottom: 20px; }
   .about-text strong { color: var(--text); font-weight: 600; }
@@ -610,6 +653,9 @@
     .services-grid { grid-template-columns: 1fr; }
     .projects-grid { grid-template-columns: 1fr; }
     .works-grid { grid-template-columns: 1fr; }
+    .project-img { width: 60px; height: 60px; left: 8px; border-radius: 10px; }
+    .project-overlay-icon { font-size: 28px; right: 12px; }
+    .about-photo { width: 140px; height: 140px; }
     .about-layout { grid-template-columns: 1fr; gap: 48px; }
     footer { flex-direction: column; gap: 12px; text-align: center; }
   }
@@ -754,6 +800,7 @@
     <div class="project-card">
       <div class="project-visual" style="background: linear-gradient(135deg, #1a0533 0%, #0d1b3e 100%);">
         <canvas id="pc1"></canvas>
+        <img class="project-img" src="my image.jpeg" alt="SmileCare Dental Clinic">
         <div class="project-overlay-icon">🦷</div>
       </div>
       <div class="project-body">
@@ -772,6 +819,7 @@
     <div class="project-card">
       <div class="project-visual" style="background: linear-gradient(135deg, #001a2a 0%, #0a200e 100%);">
         <canvas id="pc2"></canvas>
+        <img class="project-img" src="my image.jpeg" alt="Database Management System">
         <div class="project-overlay-icon">🗄️</div>
       </div>
       <div class="project-body">
@@ -789,6 +837,7 @@
     <div class="project-card">
       <div class="project-visual" style="background: linear-gradient(135deg, #1a1000 0%, #200a1a 100%);">
         <canvas id="pc3"></canvas>
+        <img class="project-img" src="my image.jpeg" alt="The Lost Depth">
         <div class="project-overlay-icon">🎮</div>
       </div>
       <div class="project-body">
@@ -805,6 +854,7 @@
     <div class="project-card">
       <div class="project-visual" style="background: linear-gradient(135deg, #0a1a10 0%, #1a1a00 100%);">
         <canvas id="pc4"></canvas>
+        <img class="project-img" src="my image.jpeg" alt="Markdown Documentation Guide">
         <div class="project-overlay-icon">📝</div>
       </div>
       <div class="project-body">
@@ -822,6 +872,7 @@
     <div class="project-card">
       <div class="project-visual" style="background: linear-gradient(135deg, #00201a 0%, #00102a 100%);">
         <canvas id="pc5"></canvas>
+        <img class="project-img" src="my image.jpeg" alt="Computer Networks Project">
         <div class="project-overlay-icon">🌐</div>
       </div>
       <div class="project-body">
@@ -839,6 +890,7 @@
     <div class="project-card">
       <div class="project-visual" style="background: linear-gradient(135deg, #1a0a20 0%, #0a1020 100%);">
         <canvas id="pc6"></canvas>
+        <img class="project-img" src="my image.jpeg" alt="Python Programming Collection">
         <div class="project-overlay-icon">🐍</div>
       </div>
       <div class="project-body">
@@ -886,6 +938,7 @@
 <section class="about-section" id="about">
   <div class="about-layout">
     <div class="about-visual" id="about-visual">
+      <img class="about-photo" src="my image.jpeg" alt="Muhammad Aon Rafay">
       <canvas class="about-canvas" id="about-canvas"></canvas>
       <div class="about-overlay">
         <div class="about-overlay-title">Based in — NASTP DELTA, Lahore</div>
