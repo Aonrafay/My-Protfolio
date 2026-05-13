@@ -99,6 +99,27 @@
   }
   .nav-links a:hover { color: var(--text); }
 
+  /* Hamburger Menu */
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 110;
+  }
+  .nav-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--text);
+    margin: 5px 0;
+    transition: transform 0.3s, opacity 0.3s;
+  }
+  .nav-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .nav-toggle.active span:nth-child(2) { opacity: 0; }
+  .nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
   .hero {
     min-height: 100vh;
     display: flex;
@@ -649,17 +670,108 @@
   .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
   .reveal.visible { opacity: 1; transform: none; }
 
+  /* ===== RESPONSIVE ===== */
+
+  /* Tablet & below (900px) */
   @media (max-width: 900px) {
-    nav { padding: 20px 24px; }
+    nav { padding: 16px 24px; }
+    .nav-toggle { display: block; }
+    .nav-links {
+      position: fixed;
+      top: 0; right: -100%;
+      width: 280px;
+      height: 100vh;
+      background: rgba(9,9,11,0.95);
+      backdrop-filter: blur(20px);
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 80px 32px;
+      gap: 24px;
+      border-left: 1px solid var(--border);
+      transition: right 0.3s ease;
+      z-index: 105;
+    }
+    .nav-links.open { right: 0; }
+    .nav-links a { font-size: 16px; }
     .hero { padding: 120px 24px 60px; }
+    .hero-desc { font-size: 16px; margin-bottom: 32px; }
+    .hero-actions { flex-wrap: wrap; }
     .stats-strip { grid-template-columns: repeat(2, 1fr); }
+    .stat-item { padding: 24px 20px; }
+    .stat-num { font-size: 36px; }
     section { padding: 80px 24px; }
-    .services-grid { grid-template-columns: 1fr; }
-    .projects-grid { grid-template-columns: 1fr; }
-    .works-grid { grid-template-columns: 1fr; }
-    .about-photo { width: 150px; height: 150px; }
+    .section-sub { margin-bottom: 40px; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .projects-grid { grid-template-columns: 1fr 1fr; }
+    .about-photo { width: 160px; height: 160px; }
+    .about-photo-ring { inset: -5px; }
+    .about-photo-glow { inset: -16px; }
     .about-layout { grid-template-columns: 1fr; gap: 48px; }
-    footer { flex-direction: column; gap: 12px; text-align: center; }
+    .about-visual { height: 400px; }
+    .skills-list { grid-template-columns: repeat(2, 1fr); }
+    footer { padding: 24px; flex-direction: column; gap: 12px; text-align: center; }
+  }
+
+  /* Mobile (768px) */
+  @media (max-width: 768px) {
+    .cursor, .cursor-ring { display: none !important; }
+    nav { padding: 14px 16px; }
+    .hero { padding: 100px 16px 40px; min-height: auto; }
+    .hero-title { font-size: clamp(40px, 10vw, 60px); }
+    .hero-desc { font-size: 15px; max-width: 100%; }
+    .hero-actions { flex-direction: column; width: 100%; }
+    .btn-primary, .btn-ghost { width: 100%; text-align: center; }
+    .hero-scroll { display: none; }
+    .stats-strip { grid-template-columns: repeat(2, 1fr); }
+    .stat-item { padding: 20px 16px; }
+    .stat-num { font-size: 28px; }
+    .stat-label { font-size: 11px; }
+    section { padding: 60px 16px; }
+    .section-title { font-size: clamp(28px, 6vw, 40px); }
+    .section-sub { font-size: 14px; margin-bottom: 32px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .service-card { padding: 28px 20px; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .project-visual { height: 140px; }
+    .about-photo { width: 140px; height: 140px; }
+    .about-photo-ring { inset: -4px; }
+    .about-photo-glow { inset: -14px; }
+    .about-visual { height: 350px; }
+    .about-overlay { bottom: 16px; left: 16px; padding: 14px 18px; }
+    .skills-list { grid-template-columns: 1fr; }
+    .contact-links { gap: 10px; }
+    .contact-link { padding: 10px 16px; font-size: 13px; }
+    footer { padding: 20px 16px; }
+  }
+
+  /* Small mobile (480px) */
+  @media (max-width: 480px) {
+    nav { padding: 12px 12px; }
+    .logo { font-size: 12px; }
+    .hero { padding: 80px 12px 32px; }
+    .hero-badge { font-size: 11px; padding: 5px 10px; margin-bottom: 20px; }
+    .hero-title { font-size: clamp(32px, 9vw, 48px); }
+    .hero-desc { font-size: 14px; line-height: 1.7; margin-bottom: 24px; }
+    .stats-strip { grid-template-columns: 1fr 1fr; }
+    .stat-item { padding: 16px 12px; }
+    .stat-num { font-size: 24px; }
+    section { padding: 48px 12px; }
+    .section-tag { font-size: 11px; }
+    .section-title { font-size: clamp(24px, 7vw, 36px); }
+    .service-card { padding: 24px 16px; }
+    .service-icon { width: 40px; height: 40px; font-size: 18px; }
+    .project-visual { height: 120px; }
+    .project-body { padding: 20px 16px; }
+    .about-photo { width: 120px; height: 120px; }
+    .about-photo-ring { inset: -3px; }
+    .about-photo-glow { inset: -12px; }
+    .about-visual { height: 300px; }
+    .about-overlay { bottom: 12px; left: 12px; padding: 10px 14px; }
+    .about-overlay-title { font-size: 12px; }
+    .about-overlay-sub { font-size: 10px; }
+    .about-text p { font-size: 14px; }
+    .contact-link { padding: 8px 14px; font-size: 12px; }
+    .marquee-item { padding: 16px 24px; font-size: 11px; }
   }
 </style>
 </head>
@@ -672,7 +784,12 @@
 
 <nav>
   <a href="#" class="logo">Aon Rafay</a>
-  <ul class="nav-links">
+  <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <ul class="nav-links" id="nav-links">
     <li><a href="#services">Services</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#about">About</a></li>
@@ -993,11 +1110,42 @@
 </footer>
 
 <script>
+/* Mobile detection — hide custom cursor on touch devices */
+const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+if (isTouchDevice) {
+  document.getElementById('cursor').style.display = 'none';
+  document.getElementById('cursor-ring').style.display = 'none';
+}
+
 const cur = document.getElementById('cursor');
 const ring = document.getElementById('cursor-ring');
 let mx = 0, my = 0, rx = 0, ry = 0;
-document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cur.style.left = mx+'px'; cur.style.top = my+'px'; });
-(function rAF(){ rx += (mx-rx)*0.12; ry += (my-ry)*0.12; ring.style.left = rx+'px'; ring.style.top = ry+'px'; requestAnimationFrame(rAF); })();
+if (!isTouchDevice) {
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cur.style.left = mx+'px'; cur.style.top = my+'px'; });
+  (function rAF(){ rx += (mx-rx)*0.12; ry += (my-ry)*0.12; ring.style.left = rx+'px'; ring.style.top = ry+'px'; requestAnimationFrame(rAF); })();
+}
+
+/* Hamburger menu toggle */
+const navToggle = document.getElementById('nav-toggle');
+const navLinks = document.getElementById('nav-links');
+navToggle.addEventListener('click', () => {
+  navToggle.classList.toggle('active');
+  navLinks.classList.toggle('open');
+});
+/* Close menu when a link is clicked */
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    navToggle.classList.remove('active');
+    navLinks.classList.remove('open');
+  });
+});
+/* Close menu when clicking outside */
+document.addEventListener('click', (e) => {
+  if (!navToggle.contains(e.target) && !navLinks.contains(e.target)) {
+    navToggle.classList.remove('active');
+    navLinks.classList.remove('open');
+  }
+});
 
 const pc = document.getElementById('particles-canvas');
 const ctx = pc.getContext('2d');
