@@ -514,6 +514,53 @@
     opacity: 0;
   }
   .about-canvas { position: absolute; inset: 0; }
+  .about-photo-wrap {
+    position: absolute;
+    left: 50%;
+    top: 45%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    animation: photo-morph 4s ease-in-out infinite;
+  }
+  .about-photo {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    filter: brightness(1.05) contrast(1.08);
+  }
+  .about-photo-ring {
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    background: linear-gradient(135deg, var(--accent), var(--accent2), var(--cyan)) border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: ring-rotate 6s linear infinite;
+  }
+  .about-photo-glow {
+    position: absolute;
+    inset: -20px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(124,58,237,0.35) 0%, transparent 70%);
+    animation: glow-pulse 3s ease-in-out infinite;
+  }
+  @keyframes photo-morph {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.03); }
+  }
+  @keyframes ring-rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  @keyframes glow-pulse {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.08); }
+  }
   .about-overlay {
     position: absolute;
     bottom: 32px; left: 32px;
@@ -610,6 +657,7 @@
     .services-grid { grid-template-columns: 1fr; }
     .projects-grid { grid-template-columns: 1fr; }
     .works-grid { grid-template-columns: 1fr; }
+    .about-photo { width: 150px; height: 150px; }
     .about-layout { grid-template-columns: 1fr; gap: 48px; }
     footer { flex-direction: column; gap: 12px; text-align: center; }
   }
@@ -886,6 +934,11 @@
 <section class="about-section" id="about">
   <div class="about-layout">
     <div class="about-visual" id="about-visual">
+      <div class="about-photo-wrap">
+        <div class="about-photo-glow"></div>
+        <div class="about-photo-ring"></div>
+        <img class="about-photo" src="my image.jpeg" alt="Muhammad Aon Rafay">
+      </div>
       <canvas class="about-canvas" id="about-canvas"></canvas>
       <div class="about-overlay">
         <div class="about-overlay-title">Based in — NASTP DELTA, Lahore</div>
